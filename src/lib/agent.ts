@@ -77,7 +77,6 @@ function buildAgent() {
       outputFormat: "png",
       background: "auto",
       moderation: "auto",
-      partialImages: 3,
     }),
   ];
 
