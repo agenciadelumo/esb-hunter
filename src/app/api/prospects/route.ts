@@ -16,7 +16,7 @@ function getProspectsTimeoutMs() {
 }
 
 function getProspectsMaxTurns() {
-  return getIntegerEnv("OPENAI_MAX_TURNS", 4, 1, 12);
+  return getIntegerEnv("OPENAI_MAX_TURNS", 2, 1, 12);
 }
 
 function isAbortError(error: unknown) {
