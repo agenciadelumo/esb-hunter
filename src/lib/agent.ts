@@ -52,6 +52,8 @@ type RunOptions = {
 let cachedAgent: Agent | null = null;
 const reasoningEffortOptions = ["none", "minimal", "low", "medium", "high", "xhigh"] as const;
 type ReasoningEffort = (typeof reasoningEffortOptions)[number];
+const searchContextSizeOptions = ["low", "medium", "high"] as const;
+type SearchContextSize = (typeof searchContextSizeOptions)[number];
 
 function getVectorStoreId() {
   return process.env.OPENAI_VECTOR_STORE_ID;
@@ -68,12 +70,31 @@ function getReasoningEffort(): ReasoningEffort {
     return value as ReasoningEffort;
   }
 
-  return "medium";
+  return "xhigh";
+}
+
+function getSearchContextSize(): SearchContextSize {
+  const value = process.env.OPENAI_WEB_SEARCH_CONTEXT_SIZE;
+
+  if (searchContextSizeOptions.includes(value as SearchContextSize)) {
+    return value as SearchContextSize;
+  }
+
+  return "high";
+}
+
+function getIntegerEnv(name: string, fallback: number, min: number, max: number) {
+  const parsed = Number.parseInt(process.env[name] ?? "", 10);
+  const value = Number.isFinite(parsed) ? parsed : fallback;
+  return Math.min(Math.max(value, min), max);
 }
 
 function getMaxTokens() {
-  const parsed = Number.parseInt(process.env.OPENAI_MAX_TOKENS ?? "1200", 10);
-  return Number.isFinite(parsed) && parsed > 0 ? parsed : 1200;
+  return getIntegerEnv("OPENAI_MAX_TOKENS", 4096, 256, 8192);
+}
+
+function getMaxTurns() {
+  return getIntegerEnv("OPENAI_MAX_TURNS", 8, 1, 12);
 }
 
 function buildAgent() {
@@ -87,7 +108,8 @@ function buildAgent() {
         type: "approximate",
         timezone: "America/Sao_Paulo",
       },
-      searchContextSize: "medium",
+      searchContextSize: getSearchContextSize(),
+      externalWebAccess: true,
     }),
     imageGenerationTool({
       model: "chatgpt-image-latest",
@@ -136,7 +158,7 @@ export async function runEsbHunter(input: string, options: RunOptions = {}) {
       },
     });
     const result = await runner.run(buildAgent(), input, {
-      maxTurns: options.maxTurns ?? 4,
+      maxTurns: options.maxTurns ?? getMaxTurns(),
       ...(options.signal ? { signal: options.signal } : {}),
     });
 

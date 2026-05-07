@@ -10,7 +10,19 @@ type ChatMessage = {
   content: string;
 };
 
-const CHAT_TIMEOUT_MS = 50_000;
+function getIntegerEnv(name: string, fallback: number, min: number, max: number) {
+  const parsed = Number.parseInt(process.env[name] ?? "", 10);
+  const value = Number.isFinite(parsed) ? parsed : fallback;
+  return Math.min(Math.max(value, min), max);
+}
+
+function getChatTimeoutMs() {
+  return getIntegerEnv("CHAT_TIMEOUT_MS", 57_000, 5_000, 58_000);
+}
+
+function getChatMaxTurns() {
+  return getIntegerEnv("OPENAI_MAX_TURNS", 8, 1, 12);
+}
 
 function isAbortError(error: unknown) {
   return error instanceof Error && (error.name === "AbortError" || error.message.toLowerCase().includes("abort"));
@@ -35,7 +47,7 @@ Responda em português do Brasil, com foco prático para venda B2B industrial.`;
 
 export async function POST(request: Request) {
   const timeoutController = new AbortController();
-  const timeout = setTimeout(() => timeoutController.abort(), CHAT_TIMEOUT_MS);
+  const timeout = setTimeout(() => timeoutController.abort(), getChatTimeoutMs());
 
   try {
     await requireSession();
@@ -51,7 +63,7 @@ export async function POST(request: Request) {
     const result = await runEsbHunter(buildPrompt(message.trim(), history), {
       traceName: "ESB-HUNTER Chat",
       signal: timeoutController.signal,
-      maxTurns: 4,
+      maxTurns: getChatMaxTurns(),
     });
 
     return NextResponse.json({ message: result.output_text });

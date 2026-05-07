@@ -5,6 +5,24 @@ import { runEsbHunter } from "@/lib/agent";
 export const runtime = "nodejs";
 export const maxDuration = 60;
 
+function getIntegerEnv(name: string, fallback: number, min: number, max: number) {
+  const parsed = Number.parseInt(process.env[name] ?? "", 10);
+  const value = Number.isFinite(parsed) ? parsed : fallback;
+  return Math.min(Math.max(value, min), max);
+}
+
+function getProspectsTimeoutMs() {
+  return getIntegerEnv("PROSPECTS_TIMEOUT_MS", 57_000, 5_000, 58_000);
+}
+
+function getProspectsMaxTurns() {
+  return getIntegerEnv("OPENAI_MAX_TURNS", 8, 1, 12);
+}
+
+function isAbortError(error: unknown) {
+  return error instanceof Error && (error.name === "AbortError" || error.message.toLowerCase().includes("abort"));
+}
+
 type Prospect = {
   name: string;
   segment: string;
@@ -51,6 +69,9 @@ function extractJsonArray(text: string): Prospect[] | null {
 }
 
 export async function POST(request: Request) {
+  const timeoutController = new AbortController();
+  const timeout = setTimeout(() => timeoutController.abort(), getProspectsTimeoutMs());
+
   try {
     await requireSession();
     const { segment, region, notes } = (await request.json()) as {
@@ -85,6 +106,8 @@ Use busca na web quando útil. Retorne somente JSON válido, sem markdown, no fo
 
     const result = await runEsbHunter(prompt, {
       traceName: "ESB-HUNTER Prospects",
+      signal: timeoutController.signal,
+      maxTurns: getProspectsMaxTurns(),
     });
     const prospects = extractJsonArray(result.output_text);
 
@@ -93,8 +116,17 @@ Use busca na web quando útil. Retorne somente JSON válido, sem markdown, no fo
       raw: prospects ? undefined : result.output_text,
     });
   } catch (error) {
+    if (isAbortError(error)) {
+      return NextResponse.json(
+        { error: "A busca de empresas demorou mais que o limite da Vercel. Tente reduzir segmento, região ou filtros." },
+        { status: 504 },
+      );
+    }
+
     const message = error instanceof Error ? error.message : "Erro ao buscar empresas.";
     const status = message === "Unauthorized" ? 401 : 500;
     return NextResponse.json({ error: message }, { status });
+  } finally {
+    clearTimeout(timeout);
   }
 }
