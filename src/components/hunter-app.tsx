@@ -78,6 +78,20 @@ function downloadJson(filename: string, data: unknown) {
   URL.revokeObjectURL(url);
 }
 
+async function readApiPayload<T extends { error?: string }>(response: Response): Promise<T> {
+  const contentType = response.headers.get("content-type") ?? "";
+
+  if (contentType.includes("application/json")) {
+    return (await response.json()) as T;
+  }
+
+  const text = await response.text();
+
+  return {
+    error: text.trim() || `Erro HTTP ${response.status}.`,
+  } as T;
+}
+
 function formatMessageTime(message: Message) {
   if (message.id === "welcome") {
     return "Mensagem inicial";
@@ -271,10 +285,14 @@ function ChatPanel({
           history: messages.map((message) => ({ role: message.role, content: message.content })),
         }),
       });
-      const payload = await response.json();
+      const payload = await readApiPayload<{ message?: string; error?: string }>(response);
 
       if (!response.ok) {
         throw new Error(payload.error ?? "Falha ao consultar o agente.");
+      }
+
+      if (!payload.message) {
+        throw new Error("O agente respondeu sem mensagem.");
       }
 
       setMessages([
@@ -406,10 +424,18 @@ function FilesPanel({
       const body = new FormData();
       body.append("file", file);
       const response = await fetch("/api/upload", { method: "POST", body });
-      const payload = await response.json();
+      const payload = await readApiPayload<{
+        error?: string;
+        file?: { id: string; filename: string; bytes: number };
+        vectorStoreFile?: { status: string };
+      }>(response);
 
       if (!response.ok) {
         throw new Error(payload.error ?? "Falha no upload.");
+      }
+
+      if (!payload.file || !payload.vectorStoreFile) {
+        throw new Error("Upload concluído sem dados do arquivo.");
       }
 
       setUploads([

@@ -45,9 +45,13 @@ Reminder: Act as an ESB Hunter focused on supporting industrial LED lighting sal
 
 type RunOptions = {
   traceName?: string;
+  signal?: AbortSignal;
+  maxTurns?: number;
 };
 
 let cachedAgent: Agent | null = null;
+const reasoningEffortOptions = ["none", "minimal", "low", "medium", "high", "xhigh"] as const;
+type ReasoningEffort = (typeof reasoningEffortOptions)[number];
 
 function getVectorStoreId() {
   return process.env.OPENAI_VECTOR_STORE_ID;
@@ -55,6 +59,21 @@ function getVectorStoreId() {
 
 function getWorkflowId() {
   return process.env.OPENAI_WORKFLOW_ID ?? "wf_69fb8134c93c8190aaea8925010df00c0361d6656709f266";
+}
+
+function getReasoningEffort(): ReasoningEffort {
+  const value = process.env.OPENAI_REASONING_EFFORT;
+
+  if (reasoningEffortOptions.includes(value as ReasoningEffort)) {
+    return value as ReasoningEffort;
+  }
+
+  return "medium";
+}
+
+function getMaxTokens() {
+  const parsed = Number.parseInt(process.env.OPENAI_MAX_TOKENS ?? "1200", 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : 1200;
 }
 
 function buildAgent() {
@@ -93,9 +112,10 @@ function buildAgent() {
     tools,
     modelSettings: {
       reasoning: {
-        effort: "xhigh",
+        effort: getReasoningEffort(),
         summary: "auto",
       },
+      maxTokens: getMaxTokens(),
       store: true,
     },
   });
@@ -115,7 +135,10 @@ export async function runEsbHunter(input: string, options: RunOptions = {}) {
         workflow_id: getWorkflowId(),
       },
     });
-    const result = await runner.run(buildAgent(), input);
+    const result = await runner.run(buildAgent(), input, {
+      maxTurns: options.maxTurns ?? 4,
+      ...(options.signal ? { signal: options.signal } : {}),
+    });
 
     if (!result.finalOutput) {
       throw new Error("Agent result is undefined");
