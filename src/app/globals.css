@@ -745,6 +745,43 @@ select:focus {
   font-size: 1.35rem;
 }
 
+.crm-sync-banner {
+  align-items: center;
+  background: rgba(124, 203, 212, 0.08);
+  border: 1px solid rgba(124, 203, 212, 0.28);
+  border-radius: 8px;
+  color: var(--muted-strong);
+  display: flex;
+  gap: 9px;
+  line-height: 1.45;
+  padding: 10px 12px;
+}
+
+.crm-sync-banner.central {
+  background: rgba(131, 209, 139, 0.09);
+  border-color: rgba(131, 209, 139, 0.32);
+}
+
+.crm-sync-banner.local,
+.crm-sync-banner.error {
+  background: rgba(227, 187, 104, 0.1);
+  border-color: rgba(227, 187, 104, 0.34);
+}
+
+.crm-sync-banner.error {
+  border-color: rgba(239, 111, 108, 0.42);
+}
+
+.crm-sync-banner svg {
+  color: var(--primary);
+  flex: 0 0 auto;
+}
+
+.crm-sync-banner.local svg,
+.crm-sync-banner.error svg {
+  color: var(--amber);
+}
+
 .prospection-layout {
   display: grid;
   gap: 14px;

@@ -5,6 +5,7 @@ import {
   AlertCircle,
   Building2,
   Clock3,
+  Database,
   Download,
   Filter,
   type LucideIcon,
@@ -17,14 +18,14 @@ import {
   Save,
   Trash2,
   Users,
+  WifiOff,
   Wrench,
 } from "lucide-react";
 import rawProspectData from "@/data/prospect-leads.json";
+import type { CatalogChannel, CrmRecord, FollowUpChannel, QualificationStatus } from "@/lib/prospect-crm-types";
 import { cn } from "@/lib/utils";
 
-type QualificationStatus = "none" | "green" | "yellow" | "orange" | "red";
-type CatalogChannel = "" | "whatsapp" | "email";
-type FollowUpChannel = "" | "ligacao" | "whatsapp" | "obra" | "reforma";
+type StorageMode = "loading" | "central" | "local" | "error";
 
 type ProspectDataset = {
   id: string;
@@ -76,23 +77,6 @@ type ProspectData = {
   generatedAt: string;
   datasets: ProspectDataset[];
   leads: ProspectLead[];
-};
-
-type CrmRecord = {
-  leadId: string;
-  status: QualificationStatus;
-  notes: string;
-  attemptSummary: string;
-  catalogChannel: CatalogChannel;
-  followUpDate: string;
-  followUpChannel: FollowUpChannel;
-  followUpReason: string;
-  serviceProviderName: string;
-  serviceProviderContact: string;
-  serviceProviderBuyer: string;
-  serviceProviderBuyerContact: string;
-  updatedAt: string;
-  updatedBy: string;
 };
 
 const prospectData = rawProspectData as ProspectData;
@@ -159,6 +143,33 @@ function readStorage<T>(key: string, fallback: T) {
   } catch {
     return fallback;
   }
+}
+
+function getRecordTime(record?: CrmRecord) {
+  if (!record?.updatedAt) {
+    return 0;
+  }
+
+  const time = Date.parse(record.updatedAt);
+  return Number.isFinite(time) ? time : 0;
+}
+
+function mergeRecordMaps(serverRecords: Record<string, CrmRecord>, localRecords: Record<string, CrmRecord>) {
+  const merged = { ...serverRecords };
+
+  for (const [leadId, localRecord] of Object.entries(localRecords)) {
+    if (getRecordTime(localRecord) > getRecordTime(merged[leadId])) {
+      merged[leadId] = localRecord;
+    }
+  }
+
+  return merged;
+}
+
+function findLocalRecordsToSync(serverRecords: Record<string, CrmRecord>, localRecords: Record<string, CrmRecord>) {
+  return Object.values(localRecords).filter(
+    (record) => record.updatedAt && getRecordTime(record) > getRecordTime(serverRecords[record.leadId]),
+  );
 }
 
 function normalize(value: string) {
@@ -275,6 +286,8 @@ export function ProspectingDashboard({
   const [search, setSearch] = useState("");
   const [selectedLeadId, setSelectedLeadId] = useState("");
   const [crmRecords, setCrmRecords] = useState<Record<string, CrmRecord>>({});
+  const [storageMode, setStorageMode] = useState<StorageMode>("loading");
+  const [syncMessage, setSyncMessage] = useState("");
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
@@ -285,8 +298,57 @@ export function ProspectingDashboard({
         return;
       }
 
-      setCrmRecords(readStorage("esb-hunter:crm-records", {}));
+      const localRecords = readStorage<Record<string, CrmRecord>>("esb-hunter:crm-records", {});
+      setCrmRecords(localRecords);
       setIsHydrated(true);
+
+      void (async () => {
+        try {
+          const response = await fetch("/api/prospect-crm", { cache: "no-store" });
+          const payload = (await response.json()) as {
+            storage?: StorageMode;
+            records?: Record<string, CrmRecord>;
+            message?: string;
+            error?: string;
+          };
+
+          if (!isMounted) {
+            return;
+          }
+
+          if (!response.ok) {
+            throw new Error(payload.error ?? "Falha ao conectar o banco central.");
+          }
+
+          if (payload.storage === "central") {
+            const serverRecords = payload.records ?? {};
+            const recordsToSync = findLocalRecordsToSync(serverRecords, localRecords);
+            setCrmRecords(mergeRecordMaps(serverRecords, localRecords));
+            setStorageMode("central");
+            setSyncMessage(recordsToSync.length ? "Sincronizando registros locais com o banco central." : "");
+
+            for (const record of recordsToSync) {
+              await saveRecordToServer(record, false);
+            }
+
+            if (isMounted) {
+              setSyncMessage("");
+            }
+
+            return;
+          }
+
+          setStorageMode("local");
+          setSyncMessage(payload.message ?? "Banco central ainda nao configurado. Usando backup local.");
+        } catch (caught) {
+          if (!isMounted) {
+            return;
+          }
+
+          setStorageMode("error");
+          setSyncMessage(caught instanceof Error ? caught.message : "Falha ao conectar o banco central.");
+        }
+      })();
     });
 
     return () => {
@@ -336,21 +398,85 @@ export function ProspectingDashboard({
 
   const selectedRecord = selectedLead ? getRecord(selectedLead, crmRecords, username) : null;
 
+  async function saveRecordToServer(record: CrmRecord, updateLocalFromServer = true) {
+    try {
+      const response = await fetch("/api/prospect-crm", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ record }),
+      });
+      const payload = (await response.json()) as {
+        storage?: StorageMode;
+        record?: CrmRecord;
+        error?: string;
+      };
+
+      if (!response.ok) {
+        throw new Error(payload.error ?? "Falha ao salvar no banco central.");
+      }
+
+      if (payload.storage === "central" && payload.record) {
+        setStorageMode("central");
+        setSyncMessage("");
+
+        if (updateLocalFromServer) {
+          setCrmRecords((current) => ({
+            ...current,
+            [payload.record!.leadId]: payload.record!,
+          }));
+        }
+      }
+    } catch (caught) {
+      setStorageMode((current) => (current === "central" ? "error" : current));
+      setSyncMessage(caught instanceof Error ? caught.message : "Falha ao salvar no banco central.");
+    }
+  }
+
+  async function deleteRecordFromServer(leadId: string) {
+    try {
+      const response = await fetch(`/api/prospect-crm/${encodeURIComponent(leadId)}`, {
+        method: "DELETE",
+      });
+      const payload = (await response.json()) as { storage?: StorageMode; error?: string };
+
+      if (!response.ok) {
+        throw new Error(payload.error ?? "Falha ao apagar no banco central.");
+      }
+
+      if (payload.storage === "central") {
+        setStorageMode("central");
+        setSyncMessage("");
+      }
+    } catch (caught) {
+      setStorageMode((current) => (current === "central" ? "error" : current));
+      setSyncMessage(caught instanceof Error ? caught.message : "Falha ao apagar no banco central.");
+    }
+  }
+
   function updateRecord(leadId: string, patch: Partial<CrmRecord>) {
+    let nextRecord: CrmRecord | null = null;
+
     setCrmRecords((current) => {
       const lead = prospectData.leads.find((item) => item.id === leadId);
       const previous = lead ? getRecord(lead, current, username) : emptyRecord(leadId, username);
+      nextRecord = {
+        ...previous,
+        ...patch,
+        leadId,
+        updatedAt: new Date().toISOString(),
+        updatedBy: username,
+      };
 
       return {
         ...current,
-        [leadId]: {
-          ...previous,
-          ...patch,
-          leadId,
-          updatedAt: new Date().toISOString(),
-          updatedBy: username,
-        },
+        [leadId]: nextRecord,
       };
+    });
+
+    queueMicrotask(() => {
+      if (nextRecord) {
+        void saveRecordToServer(nextRecord);
+      }
     });
   }
 
@@ -360,6 +486,7 @@ export function ProspectingDashboard({
       delete nextRecords[leadId];
       return nextRecords;
     });
+    void deleteRecordFromServer(leadId);
   }
 
   const dashboard = useMemo(() => {
@@ -394,6 +521,15 @@ export function ProspectingDashboard({
         <MetricBlock icon={Users} label="Qualificados" value={dashboard.qualified} />
         <MetricBlock icon={Clock3} label="Oportunidades do dia" value={dashboard.opportunities.length} />
         <MetricBlock icon={AlertCircle} label="Pendências" value={dashboard.pending.length} />
+      </div>
+
+      <div className={cn("crm-sync-banner", storageMode)}>
+        {storageMode === "central" ? <Database size={17} aria-hidden="true" /> : <WifiOff size={17} aria-hidden="true" />}
+        <span>
+          {storageMode === "central"
+            ? syncMessage || "Banco central ativo. Os atendimentos ficam disponiveis para todos os usuarios."
+            : syncMessage || "Conectando ao banco central..."}
+        </span>
       </div>
 
       <div className="prospection-layout">
@@ -486,6 +622,7 @@ export function ProspectingDashboard({
         <LeadCrmPanel
           lead={selectedLead}
           record={selectedRecord}
+          storageMode={storageMode}
           onUpdate={(patch) => selectedLead && updateRecord(selectedLead.id, patch)}
           onDelete={() => selectedLead && deleteRecord(selectedLead.id)}
           onSendToChat={onSendToChat}
@@ -612,6 +749,7 @@ function OpportunityBox({
 function LeadCrmPanel({
   lead,
   record,
+  storageMode,
   onUpdate,
   onDelete,
   onSendToChat,
@@ -619,6 +757,7 @@ function LeadCrmPanel({
 }: {
   lead?: ProspectLead;
   record: CrmRecord | null;
+  storageMode: StorageMode;
   onUpdate: (patch: Partial<CrmRecord>) => void;
   onDelete: () => void;
   onSendToChat: (prompt: string) => void;
@@ -636,6 +775,7 @@ function LeadCrmPanel({
 
   const hasManualRecord = Boolean(record.updatedAt);
   const isEditing = editingLeadId === lead.id;
+  const saveLabel = storageMode === "central" ? "Salvo no banco central" : "Salvo neste navegador";
 
   function handleDelete() {
     const confirmed = window.confirm("Apagar os dados de atendimento deste lead?");
@@ -662,7 +802,7 @@ function LeadCrmPanel({
       </div>
 
       <div className="crm-edit-bar">
-        <span>{hasManualRecord ? "Salvo neste navegador" : "Sem edição manual"}</span>
+        <span>{hasManualRecord ? saveLabel : "Sem edicao manual"}</span>
         <div>
           <button className="ghost-button" type="button" onClick={() => setEditingLeadId(isEditing ? null : lead.id)}>
             {isEditing ? <Save size={15} aria-hidden="true" /> : <Pencil size={15} aria-hidden="true" />}
