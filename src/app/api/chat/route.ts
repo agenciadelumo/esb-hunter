@@ -3,7 +3,7 @@ import { requireSession } from "@/lib/auth";
 import { runEsbHunter } from "@/lib/agent";
 
 export const runtime = "nodejs";
-export const maxDuration = 60;
+export const maxDuration = 300;
 
 type ChatMessage = {
   role: "user" | "assistant";
@@ -17,7 +17,7 @@ function getIntegerEnv(name: string, fallback: number, min: number, max: number)
 }
 
 function getChatTimeoutMs() {
-  return getIntegerEnv("CHAT_TIMEOUT_MS", 57_000, 5_000, 58_000);
+  return getIntegerEnv("CHAT_TIMEOUT_MS", 285_000, 5_000, 295_000);
 }
 
 function getChatMaxTurns() {

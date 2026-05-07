@@ -3,7 +3,7 @@ import { requireSession } from "@/lib/auth";
 import { runEsbHunter } from "@/lib/agent";
 
 export const runtime = "nodejs";
-export const maxDuration = 60;
+export const maxDuration = 300;
 
 function getIntegerEnv(name: string, fallback: number, min: number, max: number) {
   const parsed = Number.parseInt(process.env[name] ?? "", 10);
@@ -12,7 +12,7 @@ function getIntegerEnv(name: string, fallback: number, min: number, max: number)
 }
 
 function getProspectsTimeoutMs() {
-  return getIntegerEnv("PROSPECTS_TIMEOUT_MS", 57_000, 5_000, 58_000);
+  return getIntegerEnv("PROSPECTS_TIMEOUT_MS", 285_000, 5_000, 295_000);
 }
 
 function getProspectsMaxTurns() {
