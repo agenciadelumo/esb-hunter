@@ -2,7 +2,6 @@
 
 import { ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import {
-  Building2,
   ClipboardCheck,
   Columns3,
   Download,
@@ -12,7 +11,6 @@ import {
   MapPinned,
   MessageSquare,
   Rows3,
-  Search,
   Send,
   Sparkles,
   Table2,
@@ -20,6 +18,7 @@ import {
   Trash2,
   Upload,
 } from "lucide-react";
+import { ProspectingDashboard, prospectTotalLeads } from "@/components/prospecting-dashboard";
 import { cn, uid } from "@/lib/utils";
 
 type TabId = "chat" | "prospects" | "files" | "sheets";
@@ -37,20 +36,6 @@ type UploadedRecord = {
   status: string;
   bytes: number;
   createdAt: string;
-};
-
-type Prospect = {
-  id: string;
-  name: string;
-  segment: string;
-  city: string;
-  state: string;
-  fitScore: number;
-  reason: string;
-  nextStep: string;
-  searchHint: string;
-  sourceUrl?: string;
-  status: "novo" | "qualificar" | "contatar" | "proposta";
 };
 
 const tabs: Array<{ id: TabId; label: string; icon: typeof MessageSquare }> = [
@@ -105,7 +90,6 @@ export function HunterApp({ username }: { username: string }) {
   const [activeTab, setActiveTab] = useState<TabId>("chat");
   const [messages, setMessages] = useState<Message[]>(starterMessages);
   const [uploads, setUploads] = useState<UploadedRecord[]>([]);
-  const [prospects, setProspects] = useState<Prospect[]>([]);
   const [chatDraft, setChatDraft] = useState("");
   const [isHydrated, setIsHydrated] = useState(false);
 
@@ -119,7 +103,6 @@ export function HunterApp({ username }: { username: string }) {
 
       setMessages(readStorage("esb-hunter:messages", starterMessages));
       setUploads(readStorage("esb-hunter:uploads", []));
-      setProspects(readStorage("esb-hunter:prospects", []));
       setIsHydrated(true);
     });
 
@@ -144,14 +127,6 @@ export function HunterApp({ username }: { username: string }) {
     window.localStorage.setItem("esb-hunter:uploads", JSON.stringify(uploads));
   }, [isHydrated, uploads]);
 
-  useEffect(() => {
-    if (!isHydrated) {
-      return;
-    }
-
-    window.localStorage.setItem("esb-hunter:prospects", JSON.stringify(prospects));
-  }, [isHydrated, prospects]);
-
   async function handleLogout() {
     await fetch("/api/auth/logout", { method: "POST" });
     window.location.href = "/login";
@@ -166,9 +141,9 @@ export function HunterApp({ username }: { username: string }) {
     () => [
       { label: "Mensagens", value: messages.filter((item) => item.role === "user").length },
       { label: "Arquivos", value: uploads.length },
-      { label: "Prospects", value: prospects.length },
+      { label: "Leads CRM", value: prospectTotalLeads },
     ],
-    [messages, prospects.length, uploads.length],
+    [messages, uploads.length],
   );
 
   return (
@@ -240,9 +215,7 @@ export function HunterApp({ username }: { username: string }) {
             setDraft={setChatDraft}
           />
         ) : null}
-        {activeTab === "prospects" ? (
-          <ProspectingPanel prospects={prospects} setProspects={setProspects} onSendToChat={sendToChat} />
-        ) : null}
+        {activeTab === "prospects" ? <ProspectingDashboard username={username} onSendToChat={sendToChat} /> : null}
         {activeTab === "files" ? <FilesPanel uploads={uploads} setUploads={setUploads} onSendToChat={sendToChat} /> : null}
         {activeTab === "sheets" ? <SpreadsheetPanel onSendToChat={sendToChat} /> : null}
       </section>
@@ -511,236 +484,6 @@ function FilesPanel({
         </div>
       </div>
     </section>
-  );
-}
-
-function ProspectingPanel({
-  prospects,
-  setProspects,
-  onSendToChat,
-}: {
-  prospects: Prospect[];
-  setProspects: (prospects: Prospect[]) => void;
-  onSendToChat: (prompt: string) => void;
-}) {
-  const [segment, setSegment] = useState("indústrias, galpões logísticos e condomínios empresariais");
-  const [region, setRegion] = useState("São Paulo, Paraná e Santa Catarina");
-  const [notes, setNotes] = useState("priorizar empresas com áreas externas, docas, pátios e alto custo de energia");
-  const [raw, setRaw] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  async function handleSearch(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setIsLoading(true);
-    setError("");
-    setRaw("");
-
-    try {
-      const response = await fetch("/api/prospects", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ segment, region, notes }),
-      });
-      const payload = await response.json();
-
-      if (!response.ok) {
-        throw new Error(payload.error ?? "Falha ao buscar empresas.");
-      }
-
-      const nextProspects: Prospect[] = (payload.prospects ?? []).map((item: Omit<Prospect, "id" | "status">) => ({
-        ...item,
-        id: uid("prospect"),
-        status: "novo",
-      }));
-
-      if (nextProspects.length) {
-        setProspects([...nextProspects, ...prospects]);
-      }
-
-      if (payload.raw) {
-        setRaw(payload.raw);
-      }
-    } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "Falha ao buscar empresas.");
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  function updateStatus(id: string, status: Prospect["status"]) {
-    setProspects(prospects.map((prospect) => (prospect.id === id ? { ...prospect, status } : prospect)));
-  }
-
-  return (
-    <section className="content-grid prospect-grid">
-      <form className="search-panel" onSubmit={handleSearch}>
-        <div className="tool-panel-header">
-          <Search size={18} aria-hidden="true" />
-          <h3>Busca B2B</h3>
-        </div>
-        <label>
-          Segmento
-          <input value={segment} onChange={(event) => setSegment(event.target.value)} />
-        </label>
-        <label>
-          Região
-          <input value={region} onChange={(event) => setRegion(event.target.value)} />
-        </label>
-        <label>
-          Critérios de oportunidade
-          <textarea value={notes} onChange={(event) => setNotes(event.target.value)} rows={4} />
-        </label>
-        {error ? <p className="form-error">{error}</p> : null}
-        <button className="primary-button" type="submit" disabled={isLoading}>
-          {isLoading ? <Loader2 className="spin" size={18} aria-hidden="true" /> : <Building2 size={18} aria-hidden="true" />}
-          Buscar empresas
-        </button>
-      </form>
-
-      <ProspectMap prospects={prospects} />
-
-      <div className="records-panel prospect-list-panel">
-        <div className="section-title">
-          <h3>Pipeline</h3>
-          <button
-            className="ghost-button"
-            type="button"
-            onClick={() => downloadJson("esb-hunter-prospects.json", prospects)}
-            disabled={!prospects.length}
-          >
-            <Download size={16} aria-hidden="true" />
-            Exportar
-          </button>
-        </div>
-        {raw ? <pre className="raw-output">{raw}</pre> : null}
-        <div className="prospect-list">
-          {prospects.length ? (
-            prospects.map((prospect) => (
-              <article className="prospect-card" key={prospect.id}>
-                <div className="prospect-heading">
-                  <div>
-                    <strong>{prospect.name}</strong>
-                    <span>
-                      {prospect.segment} · {prospect.city}/{prospect.state}
-                    </span>
-                  </div>
-                  <b>{Math.round(prospect.fitScore)}</b>
-                </div>
-                <p>{prospect.reason}</p>
-                <small>{prospect.nextStep}</small>
-                <div className="prospect-actions">
-                  <select value={prospect.status} onChange={(event) => updateStatus(prospect.id, event.target.value as Prospect["status"])}>
-                    <option value="novo">Novo</option>
-                    <option value="qualificar">Qualificar</option>
-                    <option value="contatar">Contatar</option>
-                    <option value="proposta">Proposta</option>
-                  </select>
-                  <button
-                    className="ghost-button"
-                    type="button"
-                    onClick={() =>
-                      onSendToChat(
-                        `Prepare uma abordagem comercial para ${prospect.name}, segmento ${prospect.segment}, em ${prospect.city}/${prospect.state}. Motivo da oportunidade: ${prospect.reason}. Próximo passo: ${prospect.nextStep}.`,
-                      )
-                    }
-                  >
-                    <MessageSquare size={15} aria-hidden="true" />
-                    Abordar
-                  </button>
-                </div>
-              </article>
-            ))
-          ) : (
-            <p className="empty-state">Use a busca B2B para montar o primeiro lote de contas-alvo.</p>
-          )}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-const cityPins: Record<string, { x: number; y: number }> = {
-  "são paulo-sp": { x: 58, y: 63 },
-  "campinas-sp": { x: 55, y: 60 },
-  "guarulhos-sp": { x: 59, y: 62 },
-  "são bernardo do campo-sp": { x: 59, y: 65 },
-  "rio de janeiro-rj": { x: 66, y: 65 },
-  "belo horizonte-mg": { x: 61, y: 54 },
-  "curitiba-pr": { x: 53, y: 72 },
-  "joinville-sc": { x: 55, y: 76 },
-  "caxias do sul-rs": { x: 48, y: 83 },
-  "porto alegre-rs": { x: 48, y: 87 },
-  "goiânia-go": { x: 49, y: 47 },
-  "salvador-ba": { x: 72, y: 42 },
-  "recife-pe": { x: 79, y: 31 },
-  "fortaleza-ce": { x: 73, y: 24 },
-  "manaus-am": { x: 28, y: 25 },
-};
-
-const stateFallback: Record<string, { x: number; y: number }> = {
-  SP: { x: 58, y: 63 },
-  PR: { x: 53, y: 72 },
-  SC: { x: 54, y: 77 },
-  RS: { x: 48, y: 86 },
-  RJ: { x: 66, y: 65 },
-  MG: { x: 60, y: 54 },
-  GO: { x: 49, y: 47 },
-  BA: { x: 71, y: 42 },
-  PE: { x: 79, y: 31 },
-  CE: { x: 73, y: 24 },
-  AM: { x: 28, y: 25 },
-};
-
-function getPin(prospect: Prospect) {
-  const key = `${prospect.city}-${prospect.state}`.toLowerCase();
-  return cityPins[key] ?? stateFallback[prospect.state.toUpperCase()] ?? { x: 56, y: 60 };
-}
-
-function ProspectMap({ prospects }: { prospects: Prospect[] }) {
-  const visible = prospects.slice(0, 28);
-
-  return (
-    <div className="map-panel">
-      <div className="section-title">
-        <h3>Mapa de prospecção</h3>
-        <span>{visible.length} contas no radar</span>
-      </div>
-      <div className="map-canvas" aria-label="Mapa aproximado de prospecção">
-        <svg viewBox="0 0 100 100" role="img" aria-label="Mapa estilizado do Brasil">
-          <path
-            d="M26 12 L43 8 L58 14 L74 25 L83 41 L76 58 L68 67 L61 82 L48 91 L37 84 L30 70 L21 61 L15 47 L20 33 Z"
-            className="map-shape"
-          />
-          <path d="M50 34 L62 42 L59 58 L48 64 L40 55 L42 42 Z" className="map-highlight" />
-        </svg>
-        {visible.map((prospect) => {
-          const pin = getPin(prospect);
-          return (
-            <span
-              className={cn("map-pin", prospect.status)}
-              key={prospect.id}
-              style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
-              title={`${prospect.name} - ${prospect.city}/${prospect.state}`}
-            />
-          );
-        })}
-      </div>
-      <div className="legend-row">
-        <span>
-          <i className="legend-dot novo" /> Novo
-        </span>
-        <span>
-          <i className="legend-dot qualificar" /> Qualificar
-        </span>
-        <span>
-          <i className="legend-dot contatar" /> Contatar
-        </span>
-        <span>
-          <i className="legend-dot proposta" /> Proposta
-        </span>
-      </div>
-    </div>
   );
 }
 

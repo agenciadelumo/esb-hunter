@@ -8,9 +8,20 @@ Aplicação Next.js pronta para deploy na Vercel com o agente comercial ESB-HUNT
 - Chat com o agente ESB-HUNTER.
 - Histórico salvo no navegador do usuário.
 - Upload de arquivos para o vector store do OpenAI File Search.
-- Busca assistida de empresas B2B.
-- Mapa de prospecção com pipeline comercial.
+- Dashboard de Prospecção com filtros por planilha/lista, cidade e busca por cliente.
+- Mapa de prospecção com pins por lead e mini CRM lateral.
+- Qualificação por cor: verde, amarelo, laranja e vermelho.
+- Blocos de oportunidades do dia, pendências e descoberta de terceirizadas para rodovias.
 - Editor de planilhas com importação/exportação XLSX/CSV.
+
+## Dados de prospecção
+
+A base inicial vem da planilha `Rodovias RS-SC-PR-SP.xlsx` e gera dois filtros no dashboard:
+
+- `ADM CONDOMÍNIO - Litoral SC e Vale do Itajaí`
+- `ADM Rodovias - SP, PR, SC e RS`
+
+Os registros de atendimento do CRM ficam no navegador do usuário via `localStorage`.
 
 ## Variáveis de ambiente
 
