@@ -29,3 +29,4 @@ esb-hunter-*.png
 Thumbs.db
 
 .vercel
+.env*.local
