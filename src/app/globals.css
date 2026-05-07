@@ -989,6 +989,27 @@ select:focus {
   justify-content: space-between;
 }
 
+.crm-edit-bar {
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.crm-edit-bar span {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.crm-edit-bar div {
+  display: flex;
+  gap: 8px;
+}
+
 .crm-header h3 {
   font-size: 1.1rem;
   margin-bottom: 5px;
@@ -1116,6 +1137,10 @@ select:focus {
 .qualification-button.active {
   background: rgba(131, 209, 139, 0.1);
   border-color: rgba(131, 209, 139, 0.42);
+}
+
+.qualification-button:disabled {
+  cursor: default;
 }
 
 .inline-fields {
@@ -1251,8 +1276,15 @@ select:focus {
   .prospection-kpis,
   .opportunity-grid,
   .lead-facts,
+  .crm-edit-bar,
   .crm-actions {
     grid-template-columns: 1fr;
+  }
+
+  .crm-edit-bar,
+  .crm-edit-bar div {
+    align-items: stretch;
+    display: grid;
   }
 
   .chat-stream {

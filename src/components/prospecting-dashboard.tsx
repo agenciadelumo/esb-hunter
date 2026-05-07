@@ -11,8 +11,11 @@ import {
   Mail,
   MapPin,
   MessageSquare,
+  Pencil,
   Phone,
   Search,
+  Save,
+  Trash2,
   Users,
   Wrench,
 } from "lucide-react";
@@ -351,6 +354,14 @@ export function ProspectingDashboard({
     });
   }
 
+  function deleteRecord(leadId: string) {
+    setCrmRecords((current) => {
+      const nextRecords = { ...current };
+      delete nextRecords[leadId];
+      return nextRecords;
+    });
+  }
+
   const dashboard = useMemo(() => {
     const records = datasetLeads.map((lead) => ({ lead, record: getRecord(lead, crmRecords, username) }));
     const opportunities = records.filter(
@@ -476,6 +487,7 @@ export function ProspectingDashboard({
           lead={selectedLead}
           record={selectedRecord}
           onUpdate={(patch) => selectedLead && updateRecord(selectedLead.id, patch)}
+          onDelete={() => selectedLead && deleteRecord(selectedLead.id)}
           onSendToChat={onSendToChat}
           onExport={() =>
             downloadJson("esb-hunter-crm-prospeccao.json", {
@@ -601,21 +613,39 @@ function LeadCrmPanel({
   lead,
   record,
   onUpdate,
+  onDelete,
   onSendToChat,
   onExport,
 }: {
   lead?: ProspectLead;
   record: CrmRecord | null;
   onUpdate: (patch: Partial<CrmRecord>) => void;
+  onDelete: () => void;
   onSendToChat: (prompt: string) => void;
   onExport: () => void;
 }) {
+  const [editingLeadId, setEditingLeadId] = useState<string | null>(null);
+
   if (!lead || !record) {
     return (
       <aside className="crm-panel">
         <p className="empty-state">Selecione um lead no mapa ou na lista para abrir o CRM.</p>
       </aside>
     );
+  }
+
+  const hasManualRecord = Boolean(record.updatedAt);
+  const isEditing = editingLeadId === lead.id;
+
+  function handleDelete() {
+    const confirmed = window.confirm("Apagar os dados de atendimento deste lead?");
+
+    if (!confirmed) {
+      return;
+    }
+
+    onDelete();
+    setEditingLeadId(null);
   }
 
   return (
@@ -629,6 +659,20 @@ function LeadCrmPanel({
           </span>
         </div>
         <b className={cn("crm-status-badge", record.status)}>{statusLabel(record.status)}</b>
+      </div>
+
+      <div className="crm-edit-bar">
+        <span>{hasManualRecord ? "Salvo neste navegador" : "Sem edição manual"}</span>
+        <div>
+          <button className="ghost-button" type="button" onClick={() => setEditingLeadId(isEditing ? null : lead.id)}>
+            {isEditing ? <Save size={15} aria-hidden="true" /> : <Pencil size={15} aria-hidden="true" />}
+            {isEditing ? "Concluir" : "Editar"}
+          </button>
+          <button className="ghost-button danger" type="button" onClick={handleDelete} disabled={!hasManualRecord}>
+            <Trash2 size={15} aria-hidden="true" />
+            Apagar
+          </button>
+        </div>
       </div>
 
       <div className="lead-facts">
@@ -646,6 +690,7 @@ function LeadCrmPanel({
               className={cn("qualification-button", option.id, record.status === option.id && "active")}
               key={option.id}
               type="button"
+              disabled={!isEditing}
               onClick={() => onUpdate({ status: option.id })}
             >
               <strong>{option.label}</strong>
@@ -660,7 +705,11 @@ function LeadCrmPanel({
           <h4>Envio de catálogo</h4>
           <label>
             Canal
-            <select value={record.catalogChannel} onChange={(event) => onUpdate({ catalogChannel: event.target.value as CatalogChannel })}>
+            <select
+              value={record.catalogChannel}
+              onChange={(event) => onUpdate({ catalogChannel: event.target.value as CatalogChannel })}
+              disabled={!isEditing}
+            >
               <option value="">Definir canal</option>
               <option value="whatsapp">WhatsApp</option>
               <option value="email">E-mail</option>
@@ -674,11 +723,20 @@ function LeadCrmPanel({
           <h4>Retorno futuro</h4>
           <label>
             Data de retorno
-            <input type="date" value={record.followUpDate} onChange={(event) => onUpdate({ followUpDate: event.target.value })} />
+            <input
+              type="date"
+              value={record.followUpDate}
+              onChange={(event) => onUpdate({ followUpDate: event.target.value })}
+              disabled={!isEditing}
+            />
           </label>
           <label>
             Tipo de retorno
-            <select value={record.followUpChannel} onChange={(event) => onUpdate({ followUpChannel: event.target.value as FollowUpChannel })}>
+            <select
+              value={record.followUpChannel}
+              onChange={(event) => onUpdate({ followUpChannel: event.target.value as FollowUpChannel })}
+              disabled={!isEditing}
+            >
               <option value="">Selecionar</option>
               <option value="ligacao">Ligação</option>
               <option value="whatsapp">WhatsApp</option>
@@ -688,7 +746,12 @@ function LeadCrmPanel({
           </label>
           <label>
             Motivo
-            <input value={record.followUpReason} onChange={(event) => onUpdate({ followUpReason: event.target.value })} placeholder="Ex.: reforma prevista no 2º semestre" />
+            <input
+              value={record.followUpReason}
+              onChange={(event) => onUpdate({ followUpReason: event.target.value })}
+              placeholder="Ex.: reforma prevista no segundo semestre"
+              disabled={!isEditing}
+            />
           </label>
         </div>
       ) : null}
@@ -701,19 +764,35 @@ function LeadCrmPanel({
           </h4>
           <label>
             Empresa prestadora de serviços
-            <input value={record.serviceProviderName} onChange={(event) => onUpdate({ serviceProviderName: event.target.value })} />
+            <input
+              value={record.serviceProviderName}
+              onChange={(event) => onUpdate({ serviceProviderName: event.target.value })}
+              disabled={!isEditing}
+            />
           </label>
           <label>
             Contato da terceirizada
-            <input value={record.serviceProviderContact} onChange={(event) => onUpdate({ serviceProviderContact: event.target.value })} />
+            <input
+              value={record.serviceProviderContact}
+              onChange={(event) => onUpdate({ serviceProviderContact: event.target.value })}
+              disabled={!isEditing}
+            />
           </label>
           <label>
             Responsável por compra de luminárias
-            <input value={record.serviceProviderBuyer} onChange={(event) => onUpdate({ serviceProviderBuyer: event.target.value })} />
+            <input
+              value={record.serviceProviderBuyer}
+              onChange={(event) => onUpdate({ serviceProviderBuyer: event.target.value })}
+              disabled={!isEditing}
+            />
           </label>
           <label>
             Contato do comprador
-            <input value={record.serviceProviderBuyerContact} onChange={(event) => onUpdate({ serviceProviderBuyerContact: event.target.value })} />
+            <input
+              value={record.serviceProviderBuyerContact}
+              onChange={(event) => onUpdate({ serviceProviderBuyerContact: event.target.value })}
+              disabled={!isEditing}
+            />
           </label>
         </div>
       ) : null}
@@ -722,11 +801,16 @@ function LeadCrmPanel({
         <h4>Registro do atendimento</h4>
         <label>
           Resumo da tentativa
-          <input value={record.attemptSummary} onChange={(event) => onUpdate({ attemptSummary: event.target.value })} placeholder="Ex.: pediu orçamento, solicitou catálogo..." />
+          <input
+            value={record.attemptSummary}
+            onChange={(event) => onUpdate({ attemptSummary: event.target.value })}
+            placeholder="Ex.: pediu orcamento, solicitou catalogo..."
+            disabled={!isEditing}
+          />
         </label>
         <label>
           Detalhes do atendimento
-          <textarea value={record.notes} onChange={(event) => onUpdate({ notes: event.target.value })} rows={5} />
+          <textarea value={record.notes} onChange={(event) => onUpdate({ notes: event.target.value })} rows={5} disabled={!isEditing} />
         </label>
         <small>
           {record.updatedAt

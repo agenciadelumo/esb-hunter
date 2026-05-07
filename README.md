@@ -11,6 +11,7 @@ Aplicação Next.js pronta para deploy na Vercel com o agente comercial ESB-HUNT
 - Dashboard de Prospecção com filtros por planilha/lista, cidade e busca por cliente.
 - Mapa de prospecção com pins por lead e mini CRM lateral.
 - Qualificação por cor: verde, amarelo, laranja e vermelho.
+- Edição e exclusão do registro de atendimento por lead.
 - Blocos de oportunidades do dia, pendências e descoberta de terceirizadas para rodovias.
 - Editor de planilhas com importação/exportação XLSX/CSV.
 
