@@ -1,0 +1,6 @@
+.env
+.env.local
+.env.*.local
+.gh-auth*.log
+.next-dev*.log
+esb-hunter-*.png
