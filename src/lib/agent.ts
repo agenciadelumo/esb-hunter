@@ -70,7 +70,7 @@ function getReasoningEffort(): ReasoningEffort {
     return value as ReasoningEffort;
   }
 
-  return "xhigh";
+  return "high";
 }
 
 function getSearchContextSize(): SearchContextSize {
@@ -80,7 +80,7 @@ function getSearchContextSize(): SearchContextSize {
     return value as SearchContextSize;
   }
 
-  return "high";
+  return "medium";
 }
 
 function getIntegerEnv(name: string, fallback: number, min: number, max: number) {
@@ -90,11 +90,11 @@ function getIntegerEnv(name: string, fallback: number, min: number, max: number)
 }
 
 function getMaxTokens() {
-  return getIntegerEnv("OPENAI_MAX_TOKENS", 4096, 256, 8192);
+  return getIntegerEnv("OPENAI_MAX_TOKENS", 2200, 256, 8192);
 }
 
 function getMaxTurns() {
-  return getIntegerEnv("OPENAI_MAX_TURNS", 8, 1, 12);
+  return getIntegerEnv("OPENAI_MAX_TURNS", 4, 1, 12);
 }
 
 function buildAgent() {
