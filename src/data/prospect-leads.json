@@ -11,18 +11,18 @@
       "id": "adm-rodovias-sp-pr-sc-rs",
       "name": "ADM Rodovias - SP, PR, SC e RS",
       "source": "Rodovias RS-SC-PR-SP.xlsx",
-      "description": "Administradoras de rodovias e empresas correlatas. Exige descoberta da terceirizada respons?vel por manuten??o e compra de lumin?rias."
+      "description": "Administradoras de rodovias e empresas correlatas. Exige descoberta da terceirizada responsável por manutenção e compra de luminárias."
     }
   ],
   "leads": [
     {
       "id": "condominios-36763716000783",
       "sourceDatasetId": "adm-condominio-litoral-sc-vale-itajai",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "36.763.716/0007-83",
-      "segment": "ADM condom?nio / lead regional",
-      "city": "Tubarao",
+      "segment": "ADM condomínio / lead regional",
+      "city": "Tubarão",
       "state": "SC",
       "ibgeCode": "",
       "address": "RUA, SAO JOAO (MARGEM ESQUERDA), 88.708-408",
@@ -56,10 +56,10 @@
     {
       "id": "condominios-09325109000254",
       "sourceDatasetId": "adm-condominio-litoral-sc-vale-itajai",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.325.109/0002-54",
-      "segment": "ADM condom?nio / lead regional",
+      "segment": "ADM condomínio / lead regional",
       "city": "Monte Castelo",
       "state": "SC",
       "ibgeCode": "",
@@ -94,10 +94,10 @@
     {
       "id": "condominios-09313969000782",
       "sourceDatasetId": "adm-condominio-litoral-sc-vale-itajai",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.313.969/0007-82",
-      "segment": "ADM condom?nio / lead regional",
+      "segment": "ADM condomínio / lead regional",
       "city": "Garuva",
       "state": "SC",
       "ibgeCode": "",
@@ -132,11 +132,11 @@
     {
       "id": "condominios-09313969000863",
       "sourceDatasetId": "adm-condominio-litoral-sc-vale-itajai",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.313.969/0008-63",
-      "segment": "ADM condom?nio / lead regional",
-      "city": "Palhoca",
+      "segment": "ADM condomínio / lead regional",
+      "city": "Palhoça",
       "state": "SC",
       "ibgeCode": "",
       "address": "RODOVIA, ARIRIU DA FORMIGA, 88.134-001",
@@ -170,11 +170,11 @@
     {
       "id": "condominios-09313969000600",
       "sourceDatasetId": "adm-condominio-litoral-sc-vale-itajai",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.313.969/0006-00",
-      "segment": "ADM condom?nio / lead regional",
-      "city": "Biguacu",
+      "segment": "ADM condomínio / lead regional",
+      "city": "Biguaçu",
       "state": "SC",
       "ibgeCode": "",
       "address": "RUA, PRADO DE BAIXO, 88.160-018",
@@ -208,10 +208,10 @@
     {
       "id": "condominios-09313969000510",
       "sourceDatasetId": "adm-condominio-litoral-sc-vale-itajai",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.313.969/0005-10",
-      "segment": "ADM condom?nio / lead regional",
+      "segment": "ADM condomínio / lead regional",
       "city": "Porto Belo",
       "state": "SC",
       "ibgeCode": "",
@@ -246,10 +246,10 @@
     {
       "id": "condominios-36763716000511",
       "sourceDatasetId": "adm-condominio-litoral-sc-vale-itajai",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "36.763.716/0005-11",
-      "segment": "ADM condom?nio / lead regional",
+      "segment": "ADM condomínio / lead regional",
       "city": "Laguna",
       "state": "SC",
       "ibgeCode": "",
@@ -284,11 +284,11 @@
     {
       "id": "condominios-36763716000350",
       "sourceDatasetId": "adm-condominio-litoral-sc-vale-itajai",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "36.763.716/0003-50",
-      "segment": "ADM condom?nio / lead regional",
-      "city": "Ararangua",
+      "segment": "ADM condomínio / lead regional",
+      "city": "Araranguá",
       "state": "SC",
       "ibgeCode": "",
       "address": "RODOVIA, KM 404 550M, BARRANCA, 88.900-973",
@@ -322,11 +322,11 @@
     {
       "id": "condominios-36763716000430",
       "sourceDatasetId": "adm-condominio-litoral-sc-vale-itajai",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "36.763.716/0004-30",
-      "segment": "ADM condom?nio / lead regional",
-      "city": "Sao Joao do Sul",
+      "segment": "ADM condomínio / lead regional",
+      "city": "São João do Sul",
       "state": "SC",
       "ibgeCode": "",
       "address": "RODOVIA, KM 457 530M, CENTRO, 88.970-000",
@@ -360,11 +360,11 @@
     {
       "id": "condominios-36763716000279",
       "sourceDatasetId": "adm-condominio-litoral-sc-vale-itajai",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "36.763.716/0002-79",
-      "segment": "ADM condom?nio / lead regional",
-      "city": "Tubarao",
+      "segment": "ADM condomínio / lead regional",
+      "city": "Tubarão",
       "state": "SC",
       "ibgeCode": "",
       "address": "RODOVIA, KM 344 700M, SAO CRISTOVAO, 88.703-105",
@@ -398,11 +398,11 @@
     {
       "id": "condominios-09313969000430",
       "sourceDatasetId": "adm-condominio-litoral-sc-vale-itajai",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.313.969/0004-30",
-      "segment": "ADM condom?nio / lead regional",
-      "city": "Sao Jose",
+      "segment": "ADM condomínio / lead regional",
+      "city": "São José",
       "state": "SC",
       "ibgeCode": "",
       "address": "AVENIDA, SERTAO DO MARUIM, 88.122-040",
@@ -439,7 +439,7 @@
       "companyName": "CATARINENSE HOLDING",
       "tradeName": "CATARINENSE HOLDING",
       "cnpj": "36.763.716/0001-98",
-      "segment": "ADM condom?nio / lead regional",
+      "segment": "ADM condomínio / lead regional",
       "city": "Capivari de Baixo",
       "state": "SC",
       "ibgeCode": "",
@@ -477,8 +477,8 @@
       "companyName": "L. F SERVICOS",
       "tradeName": "L. F SERVICOS",
       "cnpj": "25.307.163/0001-42",
-      "segment": "ADM condom?nio / lead regional",
-      "city": "Campo Ere",
+      "segment": "ADM condomínio / lead regional",
+      "city": "Campo Erê",
       "state": "SC",
       "ibgeCode": "",
       "address": "ACESSO, SALA, INTERIOR, 89.980-000",
@@ -512,7 +512,7 @@
     {
       "id": "rodovias-62790028000127",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "62.790.028/0001-27",
       "segment": "Administradora de rodovias",
@@ -626,7 +626,7 @@
     {
       "id": "rodovias-47815827000117",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "47.815.827/0001-17",
       "segment": "Administradora de rodovias",
@@ -702,7 +702,7 @@
     {
       "id": "rodovias-32161500001173",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "32.161.500/0011-73",
       "segment": "Administradora de rodovias",
@@ -740,7 +740,7 @@
     {
       "id": "rodovias-32161500000959",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "32.161.500/0009-59",
       "segment": "Administradora de rodovias",
@@ -778,7 +778,7 @@
     {
       "id": "rodovias-32161500001092",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "32.161.500/0010-92",
       "segment": "Administradora de rodovias",
@@ -816,7 +816,7 @@
     {
       "id": "rodovias-36763716000600",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "36.763.716/0006-00",
       "segment": "Administradora de rodovias",
@@ -854,7 +854,7 @@
     {
       "id": "rodovias-41886692000102",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "41.886.692/0001-02",
       "segment": "Administradora de rodovias",
@@ -892,7 +892,7 @@
     {
       "id": "rodovias-32161500000525",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "32.161.500/0005-25",
       "segment": "Administradora de rodovias",
@@ -930,7 +930,7 @@
     {
       "id": "rodovias-32161500000606",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "32.161.500/0006-06",
       "segment": "Administradora de rodovias",
@@ -968,7 +968,7 @@
     {
       "id": "rodovias-32161500000797",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "32.161.500/0007-97",
       "segment": "Administradora de rodovias",
@@ -1006,7 +1006,7 @@
     {
       "id": "rodovias-32161500000444",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "32.161.500/0004-44",
       "segment": "Administradora de rodovias",
@@ -1044,7 +1044,7 @@
     {
       "id": "rodovias-32161500000878",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "32.161.500/0008-78",
       "segment": "Administradora de rodovias",
@@ -1082,7 +1082,7 @@
     {
       "id": "rodovias-32161500000282",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "32.161.500/0002-82",
       "segment": "Administradora de rodovias",
@@ -1120,7 +1120,7 @@
     {
       "id": "rodovias-32161500000363",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "32.161.500/0003-63",
       "segment": "Administradora de rodovias",
@@ -1158,7 +1158,7 @@
     {
       "id": "rodovias-32161500000100",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "32.161.500/0001-00",
       "segment": "Administradora de rodovias",
@@ -1234,7 +1234,7 @@
     {
       "id": "rodovias-18362367000110",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "18.362.367/0001-10",
       "segment": "Administradora de rodovias",
@@ -1614,7 +1614,7 @@
     {
       "id": "rodovias-02498984000108",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.498.984/0001-08",
       "segment": "Administradora de rodovias",
@@ -1652,7 +1652,7 @@
     {
       "id": "rodovias-01654604000114",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "01.654.604/0001-14",
       "segment": "Administradora de rodovias",
@@ -1690,11 +1690,11 @@
     {
       "id": "rodovias-36763716000783",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "36.763.716/0007-83",
       "segment": "Administradora de rodovias",
-      "city": "Tubarao",
+      "city": "Tubarão",
       "state": "SC",
       "ibgeCode": "",
       "address": "RUA, SAO JOAO (MARGEM ESQUERDA), 88.708-408",
@@ -1728,7 +1728,7 @@
     {
       "id": "rodovias-09325109000254",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.325.109/0002-54",
       "segment": "Administradora de rodovias",
@@ -1766,7 +1766,7 @@
     {
       "id": "rodovias-09313969000782",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.313.969/0007-82",
       "segment": "Administradora de rodovias",
@@ -1804,11 +1804,11 @@
     {
       "id": "rodovias-09313969000863",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.313.969/0008-63",
       "segment": "Administradora de rodovias",
-      "city": "Palhoca",
+      "city": "Palhoça",
       "state": "SC",
       "ibgeCode": "",
       "address": "RODOVIA, ARIRIU DA FORMIGA, 88.134-001",
@@ -1842,11 +1842,11 @@
     {
       "id": "rodovias-09313969000600",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.313.969/0006-00",
       "segment": "Administradora de rodovias",
-      "city": "Biguacu",
+      "city": "Biguaçu",
       "state": "SC",
       "ibgeCode": "",
       "address": "RUA, PRADO DE BAIXO, 88.160-018",
@@ -1880,7 +1880,7 @@
     {
       "id": "rodovias-09313969000510",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.313.969/0005-10",
       "segment": "Administradora de rodovias",
@@ -1918,7 +1918,7 @@
     {
       "id": "rodovias-36763716000511",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "36.763.716/0005-11",
       "segment": "Administradora de rodovias",
@@ -1956,11 +1956,11 @@
     {
       "id": "rodovias-36763716000350",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "36.763.716/0003-50",
       "segment": "Administradora de rodovias",
-      "city": "Ararangua",
+      "city": "Araranguá",
       "state": "SC",
       "ibgeCode": "",
       "address": "RODOVIA, KM 404 550M, BARRANCA, 88.900-973",
@@ -1994,11 +1994,11 @@
     {
       "id": "rodovias-36763716000430",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "36.763.716/0004-30",
       "segment": "Administradora de rodovias",
-      "city": "Sao Joao do Sul",
+      "city": "São João do Sul",
       "state": "SC",
       "ibgeCode": "",
       "address": "RODOVIA, KM 457 530M, CENTRO, 88.970-000",
@@ -2032,11 +2032,11 @@
     {
       "id": "rodovias-36763716000279",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "36.763.716/0002-79",
       "segment": "Administradora de rodovias",
-      "city": "Tubarao",
+      "city": "Tubarão",
       "state": "SC",
       "ibgeCode": "",
       "address": "RODOVIA, KM 344 700M, SAO CRISTOVAO, 88.703-105",
@@ -2070,11 +2070,11 @@
     {
       "id": "rodovias-09313969000430",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.313.969/0004-30",
       "segment": "Administradora de rodovias",
-      "city": "Sao Jose",
+      "city": "São José",
       "state": "SC",
       "ibgeCode": "",
       "address": "AVENIDA, SERTAO DO MARUIM, 88.122-040",
@@ -2150,7 +2150,7 @@
       "tradeName": "L. F SERVICOS",
       "cnpj": "25.307.163/0001-42",
       "segment": "Administradora de rodovias",
-      "city": "Campo Ere",
+      "city": "Campo Erê",
       "state": "SC",
       "ibgeCode": "",
       "address": "ACESSO, SALA, INTERIOR, 89.980-000",
@@ -2222,7 +2222,7 @@
     {
       "id": "rodovias-59196897000547",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "59.196.897/0005-47",
       "segment": "Administradora de rodovias",
@@ -2260,7 +2260,7 @@
     {
       "id": "rodovias-59196897000202",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "59.196.897/0002-02",
       "segment": "Administradora de rodovias",
@@ -2298,7 +2298,7 @@
     {
       "id": "rodovias-59196897000385",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "59.196.897/0003-85",
       "segment": "Administradora de rodovias",
@@ -2336,7 +2336,7 @@
     {
       "id": "rodovias-59196897000466",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "59.196.897/0004-66",
       "segment": "Administradora de rodovias",
@@ -2374,7 +2374,7 @@
     {
       "id": "rodovias-63520667000135",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "63.520.667/0001-35",
       "segment": "Administradora de rodovias",
@@ -2412,7 +2412,7 @@
     {
       "id": "rodovias-60978495000150",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "60.978.495/0001-50",
       "segment": "Administradora de rodovias",
@@ -2488,7 +2488,7 @@
     {
       "id": "rodovias-58056046000102",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "58.056.046/0001-02",
       "segment": "Administradora de rodovias",
@@ -2564,11 +2564,11 @@
     {
       "id": "rodovias-51137031000120",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "51.137.031/0001-20",
       "segment": "Administradora de rodovias",
-      "city": "Sao Jose dos Pinhais",
+      "city": "São José dos Pinhais",
       "state": "PR",
       "ibgeCode": "",
       "address": "RODOVIA, KM 60 250, BORDA DO CAMPO, 83.075-000",
@@ -2602,7 +2602,7 @@
     {
       "id": "rodovias-47155252000153",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "47.155.252/0001-53",
       "segment": "Administradora de rodovias",
@@ -2716,7 +2716,7 @@
     {
       "id": "rodovias-09325109000173",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.325.109/0001-73",
       "segment": "Administradora de rodovias",
@@ -2754,11 +2754,11 @@
     {
       "id": "rodovias-09313969000197",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.313.969/0001-97",
       "segment": "Administradora de rodovias",
-      "city": "Sao Jose dos Pinhais",
+      "city": "São José dos Pinhais",
       "state": "PR",
       "ibgeCode": "",
       "address": "RUA, BLOCO 4 MODULOS402.2 E 403, ROSEIRA DE SAO SEBASTIAO, 83.070-152",
@@ -2792,7 +2792,7 @@
     {
       "id": "rodovias-02222736000644",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.222.736/0006-44",
       "segment": "Administradora de rodovias",
@@ -2830,7 +2830,7 @@
     {
       "id": "rodovias-02222736000563",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.222.736/0005-63",
       "segment": "Administradora de rodovias",
@@ -2868,7 +2868,7 @@
     {
       "id": "rodovias-02228721001231",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.228.721/0012-31",
       "segment": "Administradora de rodovias",
@@ -2906,7 +2906,7 @@
     {
       "id": "rodovias-02228721000936",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.228.721/0009-36",
       "segment": "Administradora de rodovias",
@@ -3096,7 +3096,7 @@
     {
       "id": "rodovias-02222736000300",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.222.736/0003-00",
       "segment": "Administradora de rodovias",
@@ -3134,7 +3134,7 @@
     {
       "id": "rodovias-02222736000210",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.222.736/0002-10",
       "segment": "Administradora de rodovias",
@@ -3172,7 +3172,7 @@
     {
       "id": "rodovias-02222736000482",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.222.736/0004-82",
       "segment": "Administradora de rodovias",
@@ -3210,7 +3210,7 @@
     {
       "id": "rodovias-02221358000170",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.221.358/0001-70",
       "segment": "Administradora de rodovias",
@@ -3248,7 +3248,7 @@
     {
       "id": "rodovias-02228721000189",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.228.721/0001-89",
       "segment": "Administradora de rodovias",
@@ -3286,7 +3286,7 @@
     {
       "id": "rodovias-02221155000183",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.221.155/0001-83",
       "segment": "Administradora de rodovias",
@@ -3324,7 +3324,7 @@
     {
       "id": "rodovias-02191601000154",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.191.601/0001-54",
       "segment": "Administradora de rodovias",
@@ -3362,7 +3362,7 @@
     {
       "id": "rodovias-02222736000130",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.222.736/0001-30",
       "segment": "Administradora de rodovias",
@@ -3400,7 +3400,7 @@
     {
       "id": "rodovias-66124524000100",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "66.124.524/0001-00",
       "segment": "Administradora de rodovias",
@@ -3438,7 +3438,7 @@
     {
       "id": "rodovias-64063401000173",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "64.063.401/0001-73",
       "segment": "Administradora de rodovias",
@@ -3476,7 +3476,7 @@
     {
       "id": "rodovias-58484141000700",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "58.484.141/0007-00",
       "segment": "Administradora de rodovias",
@@ -3514,7 +3514,7 @@
     {
       "id": "rodovias-58484141000379",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "58.484.141/0003-79",
       "segment": "Administradora de rodovias",
@@ -3552,7 +3552,7 @@
     {
       "id": "rodovias-58484141000530",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "58.484.141/0005-30",
       "segment": "Administradora de rodovias",
@@ -3590,7 +3590,7 @@
     {
       "id": "rodovias-58484141000450",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "58.484.141/0004-50",
       "segment": "Administradora de rodovias",
@@ -3628,7 +3628,7 @@
     {
       "id": "rodovias-58484141000611",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "58.484.141/0006-11",
       "segment": "Administradora de rodovias",
@@ -3818,7 +3818,7 @@
     {
       "id": "rodovias-56950924000103",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "56.950.924/0001-03",
       "segment": "Administradora de rodovias",
@@ -3856,7 +3856,7 @@
     {
       "id": "rodovias-55983149000120",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "55.983.149/0001-20",
       "segment": "Administradora de rodovias",
@@ -3894,7 +3894,7 @@
     {
       "id": "rodovias-55505039000152",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "55.505.039/0001-52",
       "segment": "Administradora de rodovias",
@@ -3932,7 +3932,7 @@
     {
       "id": "rodovias-55198181000102",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "55.198.181/0001-02",
       "segment": "Administradora de rodovias",
@@ -3970,7 +3970,7 @@
     {
       "id": "rodovias-09387725000310",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.387.725/0003-10",
       "segment": "Administradora de rodovias",
@@ -4160,7 +4160,7 @@
     {
       "id": "rodovias-28019100000855",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "28.019.100/0008-55",
       "segment": "Administradora de rodovias",
@@ -4198,7 +4198,7 @@
     {
       "id": "rodovias-28019100000936",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "28.019.100/0009-36",
       "segment": "Administradora de rodovias",
@@ -4236,7 +4236,7 @@
     {
       "id": "rodovias-44319688000495",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "44.319.688/0004-95",
       "segment": "Administradora de rodovias",
@@ -4274,7 +4274,7 @@
     {
       "id": "rodovias-44319688000657",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "44.319.688/0006-57",
       "segment": "Administradora de rodovias",
@@ -4312,7 +4312,7 @@
     {
       "id": "rodovias-44319688000304",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "44.319.688/0003-04",
       "segment": "Administradora de rodovias",
@@ -4350,7 +4350,7 @@
     {
       "id": "rodovias-44319688000576",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "44.319.688/0005-76",
       "segment": "Administradora de rodovias",
@@ -4388,7 +4388,7 @@
     {
       "id": "rodovias-44319688000223",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "44.319.688/0002-23",
       "segment": "Administradora de rodovias",
@@ -4426,7 +4426,7 @@
     {
       "id": "rodovias-44767594000136",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "44.767.594/0001-36",
       "segment": "Administradora de rodovias",
@@ -4464,7 +4464,7 @@
     {
       "id": "rodovias-44362740000143",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "44.362.740/0001-43",
       "segment": "Administradora de rodovias",
@@ -4540,7 +4540,7 @@
     {
       "id": "rodovias-10635691000315",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "10.635.691/0003-15",
       "segment": "Administradora de rodovias",
@@ -4578,7 +4578,7 @@
     {
       "id": "rodovias-10635691000404",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "10.635.691/0004-04",
       "segment": "Administradora de rodovias",
@@ -4616,7 +4616,7 @@
     {
       "id": "rodovias-10635691000234",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "10.635.691/0002-34",
       "segment": "Administradora de rodovias",
@@ -4654,7 +4654,7 @@
     {
       "id": "rodovias-03025305000901",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "03.025.305/0009-01",
       "segment": "Administradora de rodovias",
@@ -4692,7 +4692,7 @@
     {
       "id": "rodovias-28019100000693",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "28.019.100/0006-93",
       "segment": "Administradora de rodovias",
@@ -4730,7 +4730,7 @@
     {
       "id": "rodovias-28019100000774",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "28.019.100/0007-74",
       "segment": "Administradora de rodovias",
@@ -4768,7 +4768,7 @@
     {
       "id": "rodovias-36146575000164",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "36.146.575/0001-64",
       "segment": "Administradora de rodovias",
@@ -4806,7 +4806,7 @@
     {
       "id": "rodovias-28019100000502",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "28.019.100/0005-02",
       "segment": "Administradora de rodovias",
@@ -4844,7 +4844,7 @@
     {
       "id": "rodovias-28019100000340",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "28.019.100/0003-40",
       "segment": "Administradora de rodovias",
@@ -4882,7 +4882,7 @@
     {
       "id": "rodovias-28019100000260",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "28.019.100/0002-60",
       "segment": "Administradora de rodovias",
@@ -4920,7 +4920,7 @@
     {
       "id": "rodovias-28019100000421",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "28.019.100/0004-21",
       "segment": "Administradora de rodovias",
@@ -4958,7 +4958,7 @@
     {
       "id": "rodovias-31713607000142",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "31.713.607/0001-42",
       "segment": "Administradora de rodovias",
@@ -4996,7 +4996,7 @@
     {
       "id": "rodovias-21581284000470",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "21.581.284/0004-70",
       "segment": "Administradora de rodovias",
@@ -5034,7 +5034,7 @@
     {
       "id": "rodovias-21581284000399",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "21.581.284/0003-99",
       "segment": "Administradora de rodovias",
@@ -5072,7 +5072,7 @@
     {
       "id": "rodovias-28019100000189",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "28.019.100/0001-89",
       "segment": "Administradora de rodovias",
@@ -5110,7 +5110,7 @@
     {
       "id": "rodovias-26664057000189",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "26.664.057/0001-89",
       "segment": "Administradora de rodovias",
@@ -5186,7 +5186,7 @@
     {
       "id": "rodovias-21581284000127",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "21.581.284/0001-27",
       "segment": "Administradora de rodovias",
@@ -5300,7 +5300,7 @@
     {
       "id": "rodovias-20541127000125",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "20.541.127/0001-25",
       "segment": "Administradora de rodovias",
@@ -5376,7 +5376,7 @@
     {
       "id": "rodovias-14676284000145",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "14.676.284/0001-45",
       "segment": "Administradora de rodovias",
@@ -5414,7 +5414,7 @@
     {
       "id": "rodovias-97529887000141",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "97.529.887/0001-41",
       "segment": "Administradora de rodovias",
@@ -5794,7 +5794,7 @@
     {
       "id": "rodovias-10991785000165",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "10.991.785/0001-65",
       "segment": "Administradora de rodovias",
@@ -5870,7 +5870,7 @@
     {
       "id": "rodovias-10678505000163",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "10.678.505/0001-63",
       "segment": "Administradora de rodovias",
@@ -5946,7 +5946,7 @@
     {
       "id": "rodovias-10647979000148",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "10.647.979/0001-48",
       "segment": "Administradora de rodovias",
@@ -6022,7 +6022,7 @@
     {
       "id": "rodovias-09439640000177",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.439.640/0001-77",
       "segment": "Administradora de rodovias",
@@ -6060,7 +6060,7 @@
     {
       "id": "rodovias-09387725000159",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.387.725/0001-59",
       "segment": "Administradora de rodovias",
@@ -6136,7 +6136,7 @@
     {
       "id": "rodovias-09336431000106",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.336.431/0001-06",
       "segment": "Administradora de rodovias",
@@ -6174,7 +6174,7 @@
     {
       "id": "rodovias-09191336000153",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.191.336/0001-53",
       "segment": "Administradora de rodovias",
@@ -6212,7 +6212,7 @@
     {
       "id": "rodovias-09074183000164",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "09.074.183/0001-64",
       "segment": "Administradora de rodovias",
@@ -6250,7 +6250,7 @@
     {
       "id": "rodovias-07911471000109",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "07.911.471/0001-09",
       "segment": "Administradora de rodovias",
@@ -6326,7 +6326,7 @@
     {
       "id": "rodovias-07414106000180",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "07.414.106/0001-80",
       "segment": "Administradora de rodovias",
@@ -6364,7 +6364,7 @@
     {
       "id": "rodovias-03884380000162",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "03.884.380/0001-62",
       "segment": "Administradora de rodovias",
@@ -6402,7 +6402,7 @@
     {
       "id": "rodovias-03497792000140",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "03.497.792/0001-40",
       "segment": "Administradora de rodovias",
@@ -6478,7 +6478,7 @@
     {
       "id": "rodovias-03025305000146",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "03.025.305/0001-46",
       "segment": "Administradora de rodovias",
@@ -6516,7 +6516,7 @@
     {
       "id": "rodovias-02679185000138",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.679.185/0001-38",
       "segment": "Administradora de rodovias",
@@ -6630,7 +6630,7 @@
     {
       "id": "rodovias-02509186000134",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.509.186/0001-34",
       "segment": "Administradora de rodovias",
@@ -6668,7 +6668,7 @@
     {
       "id": "rodovias-02451848000162",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.451.848/0001-62",
       "segment": "Administradora de rodovias",
@@ -6706,7 +6706,7 @@
     {
       "id": "rodovias-02417464000123",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.417.464/0001-23",
       "segment": "Administradora de rodovias",
@@ -6744,7 +6744,7 @@
     {
       "id": "rodovias-02366097000186",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.366.097/0001-86",
       "segment": "Administradora de rodovias",
@@ -6782,7 +6782,7 @@
     {
       "id": "rodovias-02380162000128",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "02.380.162/0001-28",
       "segment": "Administradora de rodovias",
@@ -6858,7 +6858,7 @@
     {
       "id": "rodovias-01189830000171",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "01.189.830/0001-71",
       "segment": "Administradora de rodovias",
@@ -6896,7 +6896,7 @@
     {
       "id": "rodovias-68913953000184",
       "sourceDatasetId": "adm-rodovias-sp-pr-sc-rs",
-      "companyName": "Lead sem raz?o social",
+      "companyName": "Lead sem razão social",
       "tradeName": "",
       "cnpj": "68.913.953/0001-84",
       "segment": "Administradora de rodovias",

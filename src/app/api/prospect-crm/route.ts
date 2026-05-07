@@ -46,7 +46,7 @@ export async function GET() {
       return NextResponse.json({
         storage: "local",
         records: {},
-        message: "Banco central ainda nao configurado. Usando backup local do navegador.",
+        message: "Banco central ainda não configurado. Usando backup local do navegador.",
       });
     }
 
@@ -55,7 +55,7 @@ export async function GET() {
       records: await listProspectCrmRecords(),
     });
   } catch (error) {
-    return jsonError(error, "Erro ao carregar CRM de prospeccao.");
+    return jsonError(error, "Erro ao carregar CRM de prospecção.");
   }
 }
 
@@ -65,7 +65,7 @@ export async function POST(request: Request) {
 
     if (!isProspectCrmStoreConfigured()) {
       return NextResponse.json(
-        { storage: "local", error: "Banco central ainda nao configurado." },
+        { storage: "local", error: "Banco central ainda não configurado." },
         { status: 503 },
       );
     }

@@ -15,7 +15,7 @@ export async function DELETE(
 
     if (!isProspectCrmStoreConfigured()) {
       return NextResponse.json(
-        { storage: "local", error: "Banco central ainda nao configurado." },
+        { storage: "local", error: "Banco central ainda não configurado." },
         { status: 503 },
       );
     }
@@ -23,7 +23,7 @@ export async function DELETE(
     const { leadId } = await context.params;
 
     if (!leadId) {
-      return NextResponse.json({ error: "Lead invalido." }, { status: 400 });
+      return NextResponse.json({ error: "Lead inválido." }, { status: 400 });
     }
 
     await deleteProspectCrmRecord(decodeURIComponent(leadId));

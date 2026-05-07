@@ -785,7 +785,7 @@ select:focus {
 .prospection-layout {
   display: grid;
   gap: 14px;
-  grid-template-columns: 300px minmax(420px, 1fr) 420px;
+  grid-template-columns: 280px minmax(360px, 1fr) minmax(340px, 0.92fr);
   min-height: 0;
 }
 
@@ -886,6 +886,84 @@ select:focus {
 .prospect-map-canvas {
   height: min(48vh, 430px);
   min-height: 330px;
+}
+
+.tile-map {
+  background: #d9e4ee;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: grab;
+  overflow: hidden;
+  position: relative;
+  touch-action: none;
+  user-select: none;
+}
+
+.tile-map:active {
+  cursor: grabbing;
+}
+
+.tile-layer img {
+  height: 256px;
+  position: absolute;
+  width: 256px;
+}
+
+.tile-map-pin {
+  box-shadow:
+    0 0 0 3px #fff,
+    0 8px 18px rgba(0, 0, 0, 0.28);
+  height: 16px;
+  z-index: 4;
+  width: 16px;
+}
+
+.tile-map-pin::after {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 999px;
+  content: "";
+  height: 5px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 5px;
+}
+
+.map-controls {
+  display: grid;
+  gap: 6px;
+  left: 12px;
+  position: absolute;
+  top: 12px;
+  z-index: 8;
+}
+
+.map-controls button {
+  background: rgba(17, 20, 17, 0.92);
+  border: 1px solid rgba(242, 244, 239, 0.24);
+  border-radius: 6px;
+  color: var(--text);
+  font-weight: 900;
+  min-height: 34px;
+  min-width: 36px;
+  padding: 6px 10px;
+}
+
+.map-controls button:hover {
+  border-color: var(--primary);
+}
+
+.map-attribution {
+  background: rgba(17, 20, 17, 0.78);
+  border-radius: 6px;
+  bottom: 9px;
+  color: var(--muted-strong);
+  font-size: 0.72rem;
+  padding: 4px 7px;
+  position: absolute;
+  right: 9px;
+  z-index: 8;
 }
 
 .map-highlight.south {

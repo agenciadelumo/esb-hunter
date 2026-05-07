@@ -32,7 +32,7 @@ async function runRedisCommand<T>(command: Array<string | number>) {
   const config = getUpstashConfig();
 
   if (!config) {
-    throw new Error("Banco central nao configurado.");
+    throw new Error("Banco central não configurado.");
   }
 
   const response = await fetch(config.url, {
