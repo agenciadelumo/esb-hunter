@@ -82,6 +82,13 @@ export async function POST(request: Request) {
       body: uploadBody,
     });
 
+    const filename = file.name.slice(0, 512);
+    const normalizedFilename = filename
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+    const isEsbCatalog = normalizedFilename.includes("esblight") && normalizedFilename.includes("catalog");
+
     const vectorFile = await openaiFetch<VectorStoreFile>(`/vector_stores/${vectorStoreId}/files`, {
       method: "POST",
       headers: {
@@ -91,7 +98,13 @@ export async function POST(request: Request) {
         file_id: uploaded.id,
         attributes: {
           source: "esb-hunter",
-          filename: file.name.slice(0, 512),
+          filename,
+          ...(isEsbCatalog
+            ? {
+                catalog: "ESBLight Catalog 2026",
+                contains_visual_references: "true",
+              }
+            : {}),
         },
       }),
     });

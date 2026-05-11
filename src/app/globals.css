@@ -400,6 +400,62 @@ select:focus {
   white-space: pre-wrap;
 }
 
+.catalog-reference-grid,
+.generated-image-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin-top: 12px;
+}
+
+.catalog-reference-card,
+.generated-image-card {
+  background: rgba(17, 20, 17, 0.76);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted-strong);
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  overflow: hidden;
+  padding: 8px;
+  text-decoration: none;
+}
+
+.catalog-reference-card:hover,
+.generated-image-card:hover {
+  border-color: var(--primary);
+  color: var(--text);
+}
+
+.catalog-reference-card img,
+.generated-image-card img {
+  aspect-ratio: 4 / 3;
+  background: #0e100e;
+  border-radius: 6px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.catalog-reference-card span,
+.generated-image-card span {
+  color: var(--primary);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.catalog-reference-card strong {
+  font-size: 0.84rem;
+  line-height: 1.28;
+}
+
+.catalog-reference-card small {
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
 .message-meta {
   align-items: center;
   color: var(--muted);

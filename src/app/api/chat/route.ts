@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireSession } from "@/lib/auth";
 import { runEsbHunter } from "@/lib/agent";
+import { findCatalogReferences } from "@/lib/catalog";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -42,7 +43,12 @@ ${recentHistory || "Sem histórico anterior neste atendimento."}
 Solicitação atual do comercial:
 ${message}
 
-Responda em português do Brasil, com foco prático para venda B2B industrial.`;
+Instruções específicas desta conversa:
+- Responda em português do Brasil, com foco prático para venda B2B industrial.
+- Use o Catálogo ESBLight 2026 e os materiais do File Search como referência técnica principal.
+- Para concorrentes, use Web Search e compare somente dados públicos ou claramente verificáveis.
+- Quando fizer sentido mostrar imagem, QR Code, ficha ou página do catálogo, mencione o produto e a página aproximada do Catálogo ESBLight 2026.
+- Se o pedido for criar imagem, mockup ou peça visual, use a ferramenta de geração de imagens e explique como o material pode ser usado comercialmente.`;
 }
 
 export async function POST(request: Request) {
@@ -66,7 +72,13 @@ export async function POST(request: Request) {
       maxTurns: getChatMaxTurns(),
     });
 
-    return NextResponse.json({ message: result.output_text });
+    const catalogReferences = findCatalogReferences(`${message}\n${result.output_text}`, 3);
+
+    return NextResponse.json({
+      message: result.output_text,
+      catalogReferences,
+      generatedImages: result.generated_images,
+    });
   } catch (error) {
     if (isAbortError(error)) {
       return NextResponse.json(

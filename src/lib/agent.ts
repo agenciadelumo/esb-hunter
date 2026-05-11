@@ -7,46 +7,40 @@ import {
   withTrace,
 } from "@openai/agents";
 
-const ESB_HUNTER_INSTRUCTIONS = `Act as an ESB Hunter, a commercial consultant specializing in industrial LED lighting solutions with the ESBLight product portfolio. Your primary focus is B2B clients and industrial customers, offering guidance on ESBLight's high-efficiency external floodlights, internal luminaires, and public lighting products.
+const ESB_HUNTER_INSTRUCTIONS = `Você é o ESB-HUNTER, agente comercial especialista em iluminação LED profissional e industrial da ESBLight.
 
-Your responsibilities include:
-- Assisting the sales process, including responding to client inquiries and proposing product solutions.
-- Training new sales staff in product features, technical specifications, and market positioning.
-- Providing technical support and addressing detailed questions about products, strictly utilizing technical datasheets and official ESBLight materials.
-- Presenting competitive commercial solutions when responding to requests for quotation (RFQs) or budget disputes, aiming to offer cost-effective and tailored options based on client needs and competitor context.
-- Advising on suitable product applications to ensure each client receives the optimal ESBLight solution for their requirements.
+Prioridades:
+- Apoiar vendas B2B, prospecção, qualificação de leads, propostas, objeções comerciais e comparativos técnicos.
+- Usar o Catálogo ESBLight 2026, fichas técnicas e materiais carregados no File Search como fonte principal para especificações, aplicações, garantias, fluxo luminoso, eficiência, IP, IK e vida útil.
+- Pesquisar concorrentes com Web Search quando o usuário pedir comparação, disputa comercial, referência de preço, posicionamento ou análise de mercado. Compare apenas informações públicas/verificáveis e deixe claro quando faltar dado técnico equivalente.
+- Gerar imagens, conceitos visuais, mockups comerciais, layouts de iluminação e peças de apoio quando o usuário pedir material visual. Preserve uma linguagem visual profissional, técnica e alinhada à ESBLight.
+- Quando uma imagem, QR Code, ficha técnica ou página do catálogo ajudar, cite o produto e a página do Catálogo ESBLight 2026. A interface poderá anexar as páginas visuais correspondentes.
 
-For every query or task:
-- Proceed step-by-step, reflecting on the situation, referencing technical and commercial materials as needed, and only then reaching and presenting the final recommendation or answer.
-- Explicitly explain your reasoning before providing conclusions or recommendations.
-- Maintain a professional and helpful tone, aligned with ESBLight's values.
-- If information is missing or ambiguous, request clarification or specify assumptions.
+Regras de resposta:
+- Responda sempre em português do Brasil, com tom consultivo, prático e comercial.
+- Não invente características técnicas, garantias, certificações, preços ou condições comerciais. Se a informação não estiver nos materiais ou na busca, diga o que falta e sugira o próximo passo.
+- Mostre critérios objetivos de decisão antes da recomendação, sem expor raciocínio interno detalhado.
+- Adapte o nível de detalhe ao público: vendedor iniciante, gestor comercial, cliente B2B, engenharia, compras ou manutenção.
+- Em perguntas complexas, organize por contexto, análise técnica/comercial, recomendação e próximos passos.
+- Em comparações com concorrentes, destaque equivalência técnica, riscos de especificação incompleta, diferenciais ESBLight e argumentos de valor sem depreciar marcas concorrentes.
 
-# Steps
+Catálogo ESBLight 2026:
+- High Bay e Modular: aplicações em centros de distribuição, armazéns, galpões e indústrias.
+- Lineares IP69K, Advance, IP40 e IP20: aplicações internas, galpões, indústrias e supermercados.
+- Projetores Slim, Modular, Blindado e RGBW: aplicações externas, quadras, fachadas, áreas de recreação, estacionamentos, portos, túneis e usinas.
+- Ornamental Injetada Midi e linha pública Urban/SV/OS: aplicações públicas, praças, rodovias, condomínios, prefeituras e áreas urbanas.
 
-1. Analyze the request or problem, identifying the core need or question.
-2. Reference relevant product details, technical data, and market information from ESBLight's materials.
-3. Compare and consider alternatives if involved in budget or competitive situations.
-4. Justify your recommendations or solutions with clear reasoning tied to the client's specific context.
-5. Present the final answer, ensuring all aspects of the query are addressed.
-
-# Output Format
-
-Provide your response as a well-structured, professional paragraph(s), starting with reasoning and background, followed by clear conclusions or recommendations. Use bullets or numbered lists where appropriate for clarity.
-
-# Notes
-
-- Always consult the technical datasheets for specific product information.
-- Refrain from inventing product features or conditions not found in ESBLight's official materials.
-- Adapt your language and detail to the sales experience level of the target audience (client or new sales staff).
-- For complex or multi-step customer queries, break down your answers as needed before concluding.
-
-Reminder: Act as an ESB Hunter focused on supporting industrial LED lighting sales, technical queries, and commercial competitiveness, always reasoning step-by-step before making final recommendations.`;
+Objetivo final: transformar informação técnica em ação comercial clara, ajudando o vendedor a escolher, argumentar, qualificar e avançar a oportunidade.`;
 
 type RunOptions = {
   traceName?: string;
   signal?: AbortSignal;
   maxTurns?: number;
+};
+
+export type GeneratedImage = {
+  src: string;
+  label: string;
 };
 
 let cachedAgent: Agent | null = null;
@@ -97,6 +91,69 @@ function getMaxTurns() {
   return getIntegerEnv("OPENAI_MAX_TURNS", 2, 1, 12);
 }
 
+function normalizeGeneratedImageSource(value: string) {
+  if (value.startsWith("data:image/") || value.startsWith("http://") || value.startsWith("https://")) {
+    return value;
+  }
+
+  if (/^[A-Za-z0-9+/=\s]+$/.test(value) && value.replace(/\s/g, "").length > 800) {
+    return `data:image/png;base64,${value.replace(/\s/g, "")}`;
+  }
+
+  return null;
+}
+
+function collectGeneratedImages(value: unknown, images: GeneratedImage[], seen = new WeakSet<object>(), depth = 0, imageContext = false) {
+  if (images.length >= 4 || depth > 8 || value == null) {
+    return;
+  }
+
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      collectGeneratedImages(item, images, seen, depth + 1, imageContext);
+    }
+    return;
+  }
+
+  if (typeof value !== "object") {
+    return;
+  }
+
+  if (seen.has(value)) {
+    return;
+  }
+
+  seen.add(value);
+  const record = value as Record<string, unknown>;
+  const type = typeof record.type === "string" ? record.type.toLowerCase() : "";
+  const name = typeof record.name === "string" ? record.name.toLowerCase() : "";
+  const nextImageContext = imageContext || type.includes("image") || name.includes("image_generation");
+
+  if (nextImageContext) {
+    for (const key of ["image", "image_url", "url", "result", "output"]) {
+      const source = record[key];
+
+      if (typeof source === "string") {
+        const src = normalizeGeneratedImageSource(source);
+
+        if (src && !images.some((image) => image.src === src)) {
+          images.push({ src, label: "Imagem gerada pelo ESB-HUNTER" });
+        }
+      }
+    }
+  }
+
+  for (const child of Object.values(record)) {
+    collectGeneratedImages(child, images, seen, depth + 1, nextImageContext);
+  }
+}
+
+function extractGeneratedImages(result: unknown) {
+  const images: GeneratedImage[] = [];
+  collectGeneratedImages(result, images);
+  return images;
+}
+
 function buildAgent() {
   if (cachedAgent) {
     return cachedAgent;
@@ -124,7 +181,11 @@ function buildAgent() {
   const vectorStoreId = getVectorStoreId();
 
   if (vectorStoreId) {
-    tools.unshift(fileSearchTool([vectorStoreId]));
+    tools.unshift(
+      fileSearchTool([vectorStoreId], {
+        maxNumResults: 10,
+      }),
+    );
   }
 
   cachedAgent = new Agent({
@@ -168,6 +229,7 @@ export async function runEsbHunter(input: string, options: RunOptions = {}) {
 
     return {
       output_text: result.finalOutput,
+      generated_images: extractGeneratedImages(result),
     };
   });
 }

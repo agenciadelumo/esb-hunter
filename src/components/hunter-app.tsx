@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- Catalog previews and generated images are dynamic chat artifacts. */
 "use client";
 
 import { ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } from "react";
@@ -6,11 +7,13 @@ import {
   Columns3,
   Download,
   FileText,
+  ImageIcon,
   Loader2,
   LogOut,
   MapPinned,
   MessageSquare,
   Rows3,
+  Search,
   Send,
   Sparkles,
   Table2,
@@ -28,6 +31,8 @@ type Message = {
   role: "user" | "assistant";
   content: string;
   createdAt: string;
+  catalogReferences?: CatalogReference[];
+  generatedImages?: GeneratedImage[];
 };
 
 type UploadedRecord = {
@@ -36,6 +41,18 @@ type UploadedRecord = {
   status: string;
   bytes: number;
   createdAt: string;
+};
+
+type CatalogReference = {
+  page: number;
+  image: string;
+  title: string;
+  excerpt: string;
+};
+
+type GeneratedImage = {
+  src: string;
+  label: string;
 };
 
 const tabs: Array<{ id: TabId; label: string; icon: typeof MessageSquare }> = [
@@ -76,6 +93,13 @@ function downloadJson(filename: string, data: unknown) {
   link.download = filename;
   link.click();
   URL.revokeObjectURL(url);
+}
+
+function toPersistableMessages(messages: Message[]) {
+  return messages.map((message) => ({
+    ...message,
+    generatedImages: message.generatedImages?.filter((image) => image.src.length < 50_000),
+  }));
 }
 
 async function readApiPayload<T extends { error?: string }>(response: Response): Promise<T> {
@@ -130,7 +154,11 @@ export function HunterApp({ username }: { username: string }) {
       return;
     }
 
-    window.localStorage.setItem("esb-hunter:messages", JSON.stringify(messages));
+    try {
+      window.localStorage.setItem("esb-hunter:messages", JSON.stringify(toPersistableMessages(messages)));
+    } catch {
+      window.localStorage.setItem("esb-hunter:messages", JSON.stringify(starterMessages));
+    }
   }, [isHydrated, messages]);
 
   useEffect(() => {
@@ -285,7 +313,12 @@ function ChatPanel({
           history: messages.map((message) => ({ role: message.role, content: message.content })),
         }),
       });
-      const payload = await readApiPayload<{ message?: string; error?: string }>(response);
+      const payload = await readApiPayload<{
+        message?: string;
+        error?: string;
+        catalogReferences?: CatalogReference[];
+        generatedImages?: GeneratedImage[];
+      }>(response);
 
       if (!response.ok) {
         throw new Error(payload.error ?? "Falha ao consultar o agente.");
@@ -302,6 +335,8 @@ function ChatPanel({
           role: "assistant",
           content: payload.message,
           createdAt: new Date().toISOString(),
+          catalogReferences: payload.catalogReferences ?? [],
+          generatedImages: payload.generatedImages ?? [],
         },
       ]);
     } catch (caught) {
@@ -326,6 +361,34 @@ function ChatPanel({
               <span>{formatMessageTime(message)}</span>
             </div>
             <p>{message.content}</p>
+            {message.generatedImages?.length ? (
+              <div className="generated-image-grid" aria-label="Imagens geradas pelo agente">
+                {message.generatedImages.map((image, index) => (
+                  <a className="generated-image-card" href={image.src} target="_blank" rel="noreferrer" key={`${image.src}-${index}`}>
+                    <img src={image.src} alt={image.label} />
+                    <span>{image.label}</span>
+                  </a>
+                ))}
+              </div>
+            ) : null}
+            {message.catalogReferences?.length ? (
+              <div className="catalog-reference-grid" aria-label="Referências visuais do catálogo ESBLight">
+                {message.catalogReferences.map((reference) => (
+                  <a
+                    className="catalog-reference-card"
+                    href={reference.image}
+                    target="_blank"
+                    rel="noreferrer"
+                    key={reference.page}
+                  >
+                    <img src={reference.image} alt={`Página ${reference.page} do Catálogo ESBLight 2026`} />
+                    <span>Página {reference.page}</span>
+                    <strong>{reference.title}</strong>
+                    <small>{reference.excerpt}</small>
+                  </a>
+                ))}
+              </div>
+            ) : null}
           </article>
         ))}
         {isLoading ? (
@@ -368,6 +431,30 @@ function ChatPanel({
           onClick={() => setDraft("Monte um roteiro de perguntas de diagnóstico para qualificar um lead industrial.")}
         >
           Qualificar lead
+        </button>
+        <button
+          className="quick-action"
+          type="button"
+          onClick={() =>
+            setDraft(
+              "Pesquise concorrentes de iluminação LED industrial no Brasil e compare posicionamento, aplicações e argumentos comerciais com a ESBLight, usando dados públicos.",
+            )
+          }
+        >
+          <Search size={16} aria-hidden="true" />
+          Pesquisar concorrentes
+        </button>
+        <button
+          className="quick-action"
+          type="button"
+          onClick={() =>
+            setDraft(
+              "Consulte o Catálogo ESBLight 2026 e mostre referências visuais para luminárias industriais, incluindo páginas, imagens e QR Codes úteis para apresentar ao cliente.",
+            )
+          }
+        >
+          <ImageIcon size={16} aria-hidden="true" />
+          Consultar catálogo
         </button>
         <div className="tool-actions">
           <button className="ghost-button" type="button" onClick={() => downloadJson("esb-hunter-historico.json", messages)}>
