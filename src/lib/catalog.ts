@@ -35,8 +35,36 @@ const stopwords = new Set([
   "produtos",
   "solucao",
   "solucoes",
+  "catalogo",
   "esblight",
+  "ficha",
   "hunter",
+  "imagem",
+  "mostrar",
+  "mostre",
+  "pagina",
+  "referencia",
+  "referencias",
+  "visual",
+  "visuais",
+]);
+
+const productSpecificTokens = new Set([
+  "advance",
+  "bay",
+  "blindado",
+  "high",
+  "ip20",
+  "ip40",
+  "ip69k",
+  "linear",
+  "modular",
+  "ornamental",
+  "os",
+  "publica",
+  "rgbw",
+  "slim",
+  "urban",
 ]);
 
 const expansions: Record<string, string[]> = {
@@ -105,8 +133,10 @@ function toReference(page: CatalogPage): CatalogReference {
 }
 
 export function findCatalogReferences(query: string, limit = 3): CatalogReference[] {
-  const tokens = expandTokens(tokenize(query));
+  const originalTokens = tokenize(query);
+  const tokens = expandTokens(originalTokens);
   const shouldAttachVisuals = wantsVisualReference(query);
+  const requiredProductTokens = originalTokens.filter((token) => productSpecificTokens.has(token));
 
   if (!tokens.length && !shouldAttachVisuals) {
     return [];
@@ -133,7 +163,18 @@ export function findCatalogReferences(query: string, limit = 3): CatalogReferenc
 
       return { page, score };
     })
-    .filter(({ score }) => score > (shouldAttachVisuals ? 0 : 1))
+    .filter(({ page, score }) => {
+      if (score <= (shouldAttachVisuals ? 0 : 1)) {
+        return false;
+      }
+
+      if (!requiredProductTokens.length) {
+        return true;
+      }
+
+      const searchable = normalize(`${page.title} ${page.text}`);
+      return requiredProductTokens.some((token) => searchable.includes(token));
+    })
     .sort((left, right) => right.score - left.score || left.page.page - right.page.page);
 
   if (!scored.length && shouldAttachVisuals) {
